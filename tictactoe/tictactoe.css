@@ -1,0 +1,265 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+body,
+html {
+    height: 100%;
+}
+
+* {
+    box-sizing: border-box;
+    word-wrap: break-word;
+    -webkit-text-size-adjust: 100%;
+    -webkitfontsmoothing: antialiased;
+    -webkit-tap-highlight-color: transparent;
+}
+
+main {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    flex-direction: column;
+    min-height: 100%;
+    background: linear-gradient(135deg, #560056, #030d27);
+    color: #fff;
+}
+
+header {
+    font-size: 30px;
+    padding: 30px 20px 10px;
+    display: block;
+}
+
+grid-reset {
+    float: right;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    border: 2px solid #fff3;
+    background: #0004;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+    font-size: 0.8em;
+    cursor: pointer;
+    transition: 0.2s;
+    margin: auto 5px;
+}
+
+grid-reset:hover {
+    background: #0002;
+    border-color: #fff6;
+}
+
+footer {
+    display: block;
+    padding: 10px;
+    text-align: right;
+    font-size: 14px;
+    color: #727888;
+}
+
+section {
+    display: flex;
+    flex: 1;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+
+cover {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    width: 100%;
+    max-width: 400px;
+    padding: 10px;
+}
+
+square {
+    display: block;
+    width: 100%;
+    padding-bottom: 100%;
+    height: 0;
+    background: #00000011;
+    backdrop-filter: blur(8px);
+    border-radius: 10%;
+    position: relative;
+    transition: 0.2s;
+}
+
+grid-area {
+    position: absolute;
+    inset: 0;
+}
+
+grid-boxes {
+    display: flex;
+    width: 100%;
+    height: calc(calc(100% / 3) - calc(10px / 3));
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+grid-box {
+    display: block;
+    width: calc(calc(100% / 3) - calc(10px / 3));
+    height: 100%;
+    cursor: pointer;
+    position: relative;
+}
+
+grid-lines {
+    background: linear-gradient(to right,
+            #fff0,
+            #fff5,
+            #fff8,
+            #fff8,
+            #fff5,
+            #fff0);
+    height: 5px;
+    display: block;
+    width: 100%;
+}
+
+grid-line {
+    display: block;
+    width: 5px;
+    height: 100%;
+}
+
+grid-line[x] {
+    background: linear-gradient(to bottom, #fff0, #fff1, #fff8);
+}
+
+grid-line[y] {
+    background: linear-gradient(to bottom, #fff8, #fff8);
+}
+
+grid-line[z] {
+    background: linear-gradient(to bottom, #fff8, #fff1, #fff0);
+}
+
+circle,
+cross {
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    transform: scale(0);
+    transition: 0.3s;
+    inset: 0;
+}
+
+score-board {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    margin-top: auto;
+    align-items: center;
+    justify-content: space-around;
+}
+
+score-line {
+    max-width: 50%;
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+}
+
+score-count {
+    font-family: monospace;
+    font-size: 20px;
+}
+
+score-area {
+    width: 40px;
+    height: 40px;
+    position: relative;
+}
+
+score-area circle,
+score-area cross {
+    transform: scale(0.4);
+}
+
+circle {
+    box-shadow: 0 0 0 8px #2bc48a;
+}
+
+cross::after,
+cross::before {
+    display: block;
+    content: " ";
+    position: absolute;
+    inset: 50% auto auto;
+    border-radius: 4px;
+}
+
+cross::before {
+    width: 100%;
+    height: 8px;
+    background: orange;
+    transform: rotate(-45deg);
+}
+
+cross::after {
+    width: 100%;
+    height: 8px;
+    background: orange;
+    transform: rotate(45deg);
+}
+
+grid-box[checked][circle]>circle {
+    transform: scale(0.5);
+}
+
+grid-box[checked][cross]>cross {
+    transform: scale(0.5);
+}
+
+grid-box[checked][circle][pass]>circle,
+grid-box[checked][cross][pass]>cross {
+    transform: scale(0.7);
+}
+
+grid-box[checked][circle][fail]>circle,
+grid-box[checked][cross][fail]>cross {
+    transform: scale(0.1);
+}
+
+grid-play {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    inset: 0;
+    border-radius: 10%;
+    background: #0005;
+    backdrop-filter: blur(8px);
+    cursor: pointer;
+    transition: 0.2s;
+    font-size: 3.5em;
+}
+
+grid-play:hover {
+    background: #0003;
+}
+
+square[reset] grid-box:not([pass]) {
+    opacity: 0.5;
+}
+
+square:not([reset]) grid-play {
+    visibility: hidden;
+    z-index: -1;
+    opacity: 0;
+}

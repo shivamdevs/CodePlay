@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>Calculator</title>
+        <link rel="stylesheet" href="./calculator.css">
+    </head>
+    <body>
+        <div class="main">
+            <div class="body">
+                <div class="calculator">
+                    <div class="keypad-title">Calculator 1.0</div>
+                    <div class="keypad-screen">
+                        <div class="keypad-display">
+                            <div class="keypad-onhold"></div>
+                            <div class="keypad-input" data-ini="0" data-one="0" data-eql="0">0</div>
+                            <div class="keypad-operation"></div>
+                            <div class="keypad-negate"></div>
+                        </div>
+                    </div>
+                    <div class="keypad-linear">
+                        <button data-type="per" data-bind="p" class="keypad-button keypad-operator">%<span class="keypad-denoted">p</span></button>
+                        <button data-type="opr" data-key="e" data-bind="delete" class="keypad-button keypad-clear">CE<span class="keypad-denoted">DEL</span></button>
+                        <button data-type="opr" data-key="c" data-bind="escape" class="keypad-button keypad-clear">C<span class="keypad-denoted">ESC</span></button>
+                        <button data-type="opr" data-key="b" data-bind="backspace" class="keypad-button keypad-backspace">⌫<span class="keypad-denoted">⟵</span></button>
+                    </div>
+                    <div class="keypad-linear">
+                        <button data-type="art" data-key="f" data-bind="d" class="keypad-button keypad-operator">1/𝑥<span class="keypad-denoted">d</span></button>
+                        <button data-type="art" data-key="s" data-bind="s" class="keypad-button keypad-operator">𝑥 <sup style="font-size:.5em;">2</sup><span class="keypad-denoted">s</span></button>
+                        <button data-type="art" data-key="r" data-bind="r" class="keypad-button keypad-operator">√𝑥<span class="keypad-denoted">r</span></button>
+                        <button data-type="smc" data-bind="/" class="keypad-button keypad-operator">÷<span class="keypad-denoted">/</span></button>
+                    </div>
+                    <div class="keypad-linear">
+                        <button data-type="num" data-key="7" data-bind="7" class="keypad-button">7<span class="keypad-denoted">7</span></button>
+                        <button data-type="num" data-key="8" data-bind="8" class="keypad-button">8<span class="keypad-denoted">8</span></button>
+                        <button data-type="num" data-key="9" data-bind="9" class="keypad-button">9<span class="keypad-denoted">9</span></button>
+                        <button data-type="smc" data-bind="*" class="keypad-button keypad-operator">×<span class="keypad-denoted">*</span></button>
+                    </div>
+                    <div class="keypad-linear">
+                        <button data-type="num" data-key="4" data-bind="4" class="keypad-button">4<span class="keypad-denoted">4</span></button>
+                        <button data-type="num" data-key="5" data-bind="5" class="keypad-button">5<span class="keypad-denoted">5</span></button>
+                        <button data-type="num" data-key="6" data-bind="6" class="keypad-button">6<span class="keypad-denoted">6</span></button>
+                        <button data-type="smc" data-bind="-" class="keypad-button keypad-operator">-<span class="keypad-denoted">-</span></button>
+                    </div>
+                    <div class="keypad-linear">
+                        <button data-type="num" data-key="1" data-bind="1" class="keypad-button">1<span class="keypad-denoted">1</span></button>
+                        <button data-type="num" data-key="2" data-bind="2" class="keypad-button">2<span class="keypad-denoted">2</span></button>
+                        <button data-type="num" data-key="3" data-bind="3" class="keypad-button">3<span class="keypad-denoted">3</span></button>
+                        <button data-type="smc" data-bind="+" class="keypad-button keypad-operator">+<span class="keypad-denoted">+</span></button>
+                    </div>
+                    <div class="keypad-linear">
+                        <button data-type="neg" data-bind="m" class="keypad-button keypad-operator">±<span class="keypad-denoted">m</span></button>
+                        <button data-type="num" data-key="0" data-bind="0" class="keypad-button">0<span class="keypad-denoted">0</span></button>
+                        <button data-type="dec" data-bind="." class="keypad-button keypad-operator">.<span class="keypad-denoted">.</span></button>
+                        <button data-type="eql" data-bind="enter" class="keypad-button keypad-equator">=<span class="keypad-denoted">↵</span></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+<script src="./calculator.js" charset="utf-8"></script>

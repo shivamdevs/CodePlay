@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <title>Tic Tac Toe 2.5</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="./tictactoe.css">
+</head>
+
+<body>
+    <main>
+        <header>
+            <grid-reset all>✗</grid-reset>
+            <grid-reset now>↺</grid-reset>
+            Tic Tac Toe 2.5
+        </header>
+        <section>
+            <cover>
+                <square>
+                    <grid-area>
+                        <grid-boxes>
+                            <grid-box>
+                                <circle></circle>
+                                <cross></cross>
+                            </grid-box><grid-line x></grid-line><grid-box>
+                                <circle></circle>
+                                <cross></cross>
+                            </grid-box><grid-line x></grid-line><grid-box>
+                                <circle></circle>
+                                <cross></cross>
+                            </grid-box></grid-boxes><grid-lines></grid-lines><grid-boxes><grid-box>
+                                <circle></circle>
+                                <cross></cross>
+                            </grid-box><grid-line y></grid-line><grid-box>
+                                <circle></circle>
+                                <cross></cross>
+                            </grid-box><grid-line y></grid-line><grid-box>
+                                <circle></circle>
+                                <cross></cross>
+                            </grid-box></grid-boxes><grid-lines></grid-lines><grid-boxes><grid-box>
+                                <circle></circle>
+                                <cross></cross>
+                            </grid-box><grid-line z></grid-line><grid-box>
+                                <circle></circle>
+                                <cross></cross>
+                            </grid-box><grid-line z></grid-line><grid-box>
+                                <circle></circle>
+                                <cross></cross>
+                            </grid-box>
+                        </grid-boxes>
+                    </grid-area>
+                    <grid-play>↺</grid-play>
+                </square>
+                <score-board>
+                    <score-line>
+                        <score-area>
+                            <circle></circle>
+                        </score-area>
+                        <score-count circle>0</score-count>
+                    </score-line>
+                    <score-line>
+                        <score-count count>0</score-count>
+                    </score-line>
+                    <score-line>
+                        <score-area>
+                            <cross></cross>
+                        </score-area>
+                        <score-count cross>0</score-count>
+                    </score-line>
+                </score-board>
+            </cover>
+        </section>
+        <footer>© Myoasis. You can use keyboard number buttons also.</footer>
+    </main>
+</body>
+
+</html>
+<script src="./tictactoe.js" charset="utf-8"></script>
