@@ -1,11 +1,14 @@
 import React, { useEffect, useRef } from 'react';
 import './Header.css';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { logout } from '../../fb.user';
+import { ContextMenuTrigger, ContextMenu, ContextMenuItem } from 'myoasis-contextmenu';
+import 'myoasis-contextmenu/contextmenu.css';
 
 function Header({ user = null }) {
     const header = useRef();
     const openheader = useRef();
+    const navigate = useNavigate();
     useEffect(() => {
         document.addEventListener("scroll", () => {
             if (header.current) {
@@ -47,7 +50,13 @@ function Header({ user = null }) {
             </div>
             {!user && <Link to="/accounts" className="roundbutton mobile-visible"><i className="fas fa-user"></i></Link>}
             {!user && <Link to="/accounts" className="mobile-hidden bigbutton">Get started</Link>}
-            {user && <button onClick={logout} className="roundbutton header-photo"><img src={user.photoURL} alt="" /></button>}
+            {user && <>
+                <ContextMenuTrigger trigger='click' exact={false} menu="profile-menu" className="roundbutton header-photo"><img src={user.photoURL} alt="" /></ContextMenuTrigger>
+                <ContextMenu className="contextmenu"  menu="profile-menu">
+                    <ContextMenuItem  className="contextmenuitem" onClick={(data) => navigate(`/accounts/profile`)}><i className="fas fa-fw fa-delete-left"></i><span>Profile</span></ContextMenuItem>
+                    <ContextMenuItem  className="contextmenuitem" onClick={logout}><i className="fas fa-fw fa-power-off"></i><span>Logout</span></ContextMenuItem>
+                </ContextMenu>
+            </>}
         </header>
     );
 };

@@ -28,6 +28,6 @@
   "id": "/",
   "orientation": "portrait-primary",
   "display": "standalone",
-  "theme_color": "#141e26",
-  "background_color": "#141e26"
+  "theme_color": "#0e1820",
+  "background_color": "#0e1820"
 }
