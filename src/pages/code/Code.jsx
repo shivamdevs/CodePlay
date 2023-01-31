@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { getDisplayDate, setTitle } from '../../app.functions';
 import { LoadSVG } from '../../components/loading/Loading';
 import { deleteCode } from '../../fb.code';
-import { getAllCodes, getCodePlayPreview, getMyCodes } from '../../fb.data';
+import { getAllCodes, getCodePlayPreview } from '../../fb.data';
 import "./Code.css";
 
 function Code({ user = null }) {

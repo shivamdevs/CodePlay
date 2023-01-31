@@ -12,7 +12,8 @@
     display: block;
     flex: 1;
     width: 100%;
-    height: fill-available;
+    height: -webkit-fill-available;
+    height: stretch;
     border: none;
 }
 .player-footer {
