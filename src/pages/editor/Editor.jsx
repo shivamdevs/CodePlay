@@ -94,6 +94,7 @@ function Editor({ user = null }) {
                                 setContent(data.data);
                                 if (data.data.uid !== user.uid) {
                                     setContentClonable(true);
+                                    setContentSaved(false);
                                 }
                             } else {
                                 setCodeInvalid("This code doesn't exists.");
@@ -217,14 +218,14 @@ function Editor({ user = null }) {
             event.preventDefault();
             event.returnValue = "";
         };
-        if (!contentSaved) {
+        if (!contentSaved && !contentClonable) {
             window.addEventListener("beforeunload", handler);
             return () => {
                 window.removeEventListener("beforeunload", handler);
             };
         }
         return () => { };
-    }, [contentSaved]);
+    }, [contentClonable, contentSaved]);
 
     const [isPreviewEnlarged, setIsPreviewEnlarged] = useState(false);
     const togglePreviewAspect = useCallback(() => {
@@ -290,9 +291,9 @@ function Editor({ user = null }) {
             } else if (key === 70 && e.altKey) {
                 toggleWindowAspect();
             } else if (key === 71 && e.altKey) {
-                updateEditorSettings("flipDirection", !editorSettings.flipDirection)
+                updateEditorSettings("flipDirection", !editorSettings.flipDirection);
             } else {
-                return;
+                return console.log(key, e.key);
             }
             e.preventDefault();
         }
@@ -325,7 +326,7 @@ function Editor({ user = null }) {
                 {content && <div className="editor-header-flex">
                     <button className="bigbutton" onClick={toggleSettingsPanel}><i className={`far fa-cog`}></i></button>
                     <button className="bigbutton" onClick={() => updateEditorSettings("flipDirection", !editorSettings.flipDirection)}><i className={`far fa-${editorSettings.flipDirection ? "window" : "sidebar"}-flip`}></i></button>
-                    <button className="bigbutton" onClick={saveContent} ref={saveButton} disabled={!contentClonable ?? (savingContent || contentSaved)}>{contentClonable ? "Clone" : savingContent ? "Saving..." : contentSaved ? "Saved" : "Save"}</button>
+                    <button className="bigbutton" onClick={saveContent} ref={saveButton} disabled={savingContent || contentSaved}>{contentClonable ? "Clone" : savingContent ? "Saving..." : contentSaved ? "Saved" : "Save"}</button>
                 </div>}
             </header>
             {content && <ReflexContainer className="editor-main" orientation={editorSettings.flipDirection ? "vertical" : "horizontal"}>
