@@ -16,6 +16,7 @@ import Settings from './Settings';
 import Shortcuts from './Shortcuts';
 import JSZip from 'jszip';
 import { saveAs } from 'file-saver';
+import { isBrowser, isMobile } from 'react-device-detect';
 
 function Editor({ user = null }) {
     const params = useParams();
@@ -305,6 +306,8 @@ function Editor({ user = null }) {
         return () => window.removeEventListener("keydown", handle);
     }, [editorSettings.flipDirection, exportContentsAsHTML, exportContentsAsZip, isPreviewEnlarged, isResourceOpen, togglePreviewAspect, toggleResourcePanel, toggleSettingsPanel, toggleShortcutPanel]);
 
+    const [activePanel, setActivePanel] = useState("html");
+
     return (
         <section className="editor" ref={sectionElement}>
             <header className="editor-header">
@@ -329,76 +332,137 @@ function Editor({ user = null }) {
                 </div>
                 {content && <div className="editor-header-flex">
                     <button className="bigbutton" onClick={toggleSettingsPanel}><i className={`far fa-cog`}></i></button>
-                    <button className="bigbutton" onClick={() => updateEditorSettings("flipDirection", !editorSettings.flipDirection)}><i className={`far fa-${editorSettings.flipDirection ? "window" : "sidebar"}-flip`}></i></button>
-                    <button className="bigbutton" onClick={saveContent} ref={saveButton} disabled={savingContent || contentSaved}>{contentClonable ? "Clone" : savingContent ? "Saving..." : contentSaved ? "Saved" : "Save"}</button>
+                    {isBrowser && <button className="bigbutton" onClick={() => updateEditorSettings("flipDirection", !editorSettings.flipDirection)}><i className={`far fa-${editorSettings.flipDirection ? "window" : "sidebar"}-flip`}></i></button>}
+                    <button className="bigbutton" onClick={saveContent} ref={saveButton} disabled={savingContent || contentSaved}>
+                        {isBrowser && (contentClonable ? "Clone" : savingContent ? "Saving..." : contentSaved ? "Saved" : "Save")}
+                        {isMobile && (contentClonable ? <i className="far fa-copy"></i> : savingContent ? <LoadSVG /> : contentSaved ? <i className="far fa-cloud-check"></i> : <i className="far fa-save"></i>)}
+                    </button>
                 </div>}
             </header>
-            {content && <ReflexContainer className="editor-main" orientation={editorSettings.flipDirection ? "vertical" : "horizontal"}>
-                <ReflexElement name="panel" flex={resizeData.panel || 0.5} onResize={saveResizeData}>
-                    <ReflexContainer orientation={editorSettings.flipDirection ? "horizontal" : "vertical"}>
-                        <ReflexElement name="html" flex={resizeData.html || 0.333333} onResize={saveResizeData} minSize={20} className="editor-resize-panel">
-                            <div className="editor-resize-handle"><img src="/assets/images/editor/html.svg" alt="" /> HTML</div>
-                            <div className="editor-container">
-                                <CodeEditor
-                                    onMount={() => updateIframeContents(content, false)}
-                                    defaultValue={content?.html}
-                                    defaultLanguage='html'
-                                    language='html'
-                                    theme={editorSettings.theme}
-                                    onChange={(value) => updateEditorChanges(value, "html")}
-                                />
-                            </div>
-                        </ReflexElement>
-                        <ReflexSplitter propagate={true} className="editor-splitter-x" />
-                        <ReflexElement name="css" flex={resizeData.css || 0.333333} onResize={saveResizeData} minSize={20} className="editor-resize-panel">
-                            <ReflexHandle className="editor-resize-handle"><img src="/assets/images/editor/css.svg" alt="" /> CSS</ReflexHandle>
-                            <div className="editor-container">
-                                <CodeEditor
-                                    defaultValue={content?.css}
-                                    defaultLanguage='css'
-                                    language='css'
-                                    theme={editorSettings.theme}
-                                    onChange={(value) => updateEditorChanges(value, "css")}
-                                />
-                            </div>
-                        </ReflexElement>
-                        <ReflexSplitter propagate={true} className="editor-splitter-x" />
-                        <ReflexElement name="javascript" flex={resizeData.javascript || 0.333333} onResize={saveResizeData} minSize={20} className="editor-resize-panel">
-                            <ReflexHandle className="editor-resize-handle"><img src="/assets/images/editor/javascript.svg" alt="" /> JavaScript</ReflexHandle>
-                            <div className="editor-container">
-                                <CodeEditor
-                                    defaultValue={content?.javascript}
-                                    defaultLanguage='javascript'
-                                    language='javascript'
-                                    theme={editorSettings.theme}
-                                    onChange={(value) => updateEditorChanges(value, "javascript")}
-                                />
-                            </div>
-                        </ReflexElement>
-                    </ReflexContainer>
-                </ReflexElement>
-                <ReflexSplitter className="editor-splitter-y" />
-                <ReflexElement name="preview" flex={resizeData.preview || 0.5} onResize={saveResizeData}>
-                    {iframesource !== null && <iframe
-                        className={classNames("editor-iframe", { "editor-iframe-enlarged": isPreviewEnlarged })}
-                        src={iframesource}
-                        title={content?.name}
-                        sandbox="allow-scripts"
-                        ref={iFrameElement}
-                        onLoad={(e) => {
-                            e.preventDefault();
-                            pushlog(<><span>Preview loaded</span><i className="far fa-check"></i></>);
-                            if (editorSettings.autoSave) saveButton?.current?.click();
-                            URL.revokeObjectURL(e.target.src);
-                        }}
-                        onError={(e) => {
-                            pushlog(<><span>Preview loading failed</span><i className="far fa-times error"></i></>);
-                            if (editorSettings.autoSave) saveButton?.current?.click();
-                            URL.revokeObjectURL(e.target.src);
-                        }}
-                    ></iframe>}
-                </ReflexElement>
-            </ReflexContainer>}
+            {content && <>
+                {isBrowser && <ReflexContainer className="editor-main" orientation={editorSettings.flipDirection ? "vertical" : "horizontal"}>
+                    <ReflexElement name="panel" flex={resizeData.panel || 0.5} onResize={saveResizeData}>
+                        <ReflexContainer orientation={editorSettings.flipDirection ? "horizontal" : "vertical"}>
+                            <ReflexElement name="html" flex={resizeData.html || 0.333333} onResize={saveResizeData} minSize={20} className="editor-resize-panel">
+                                <div className="editor-resize-handle"><img src="/assets/images/editor/html.svg" alt="" /> HTML</div>
+                                <div className="editor-container">
+                                    <CodeEditor
+                                        onMount={() => updateIframeContents(content, false)}
+                                        defaultValue={content?.html}
+                                        defaultLanguage='html'
+                                        language='html'
+                                        theme={editorSettings.theme}
+                                        onChange={(value) => updateEditorChanges(value, "html")}
+                                    />
+                                </div>
+                            </ReflexElement>
+                            <ReflexSplitter propagate={true} className="editor-splitter-x" />
+                            <ReflexElement name="css" flex={resizeData.css || 0.333333} onResize={saveResizeData} minSize={20} className="editor-resize-panel">
+                                <ReflexHandle className="editor-resize-handle"><img src="/assets/images/editor/css.svg" alt="" /> CSS</ReflexHandle>
+                                <div className="editor-container">
+                                    <CodeEditor
+                                        defaultValue={content?.css}
+                                        defaultLanguage='css'
+                                        language='css'
+                                        theme={editorSettings.theme}
+                                        onChange={(value) => updateEditorChanges(value, "css")}
+                                    />
+                                </div>
+                            </ReflexElement>
+                            <ReflexSplitter propagate={true} className="editor-splitter-x" />
+                            <ReflexElement name="javascript" flex={resizeData.javascript || 0.333333} onResize={saveResizeData} minSize={20} className="editor-resize-panel">
+                                <ReflexHandle className="editor-resize-handle"><img src="/assets/images/editor/javascript.svg" alt="" /> JavaScript</ReflexHandle>
+                                <div className="editor-container">
+                                    <CodeEditor
+                                        defaultValue={content?.javascript}
+                                        defaultLanguage='javascript'
+                                        language='javascript'
+                                        theme={editorSettings.theme}
+                                        onChange={(value) => updateEditorChanges(value, "javascript")}
+                                    />
+                                </div>
+                            </ReflexElement>
+                        </ReflexContainer>
+                    </ReflexElement>
+                    <ReflexSplitter className="editor-splitter-y" />
+                    <ReflexElement name="preview" flex={resizeData.preview || 0.5} onResize={saveResizeData}>
+                        {iframesource !== null && <iframe
+                            className={classNames("editor-iframe", { "editor-iframe-enlarged": isPreviewEnlarged })}
+                            src={iframesource}
+                            title={content?.name}
+                            sandbox="allow-scripts"
+                            ref={iFrameElement}
+                            onLoad={(e) => {
+                                e.preventDefault();
+                                pushlog(<><span>Preview loaded</span><i className="far fa-check"></i></>);
+                                if (editorSettings.autoSave) saveButton?.current?.click();
+                                URL.revokeObjectURL(e.target.src);
+                            }}
+                            onError={(e) => {
+                                pushlog(<><span>Preview loading failed</span><i className="far fa-times error"></i></>);
+                                if (editorSettings.autoSave) saveButton?.current?.click();
+                                URL.revokeObjectURL(e.target.src);
+                            }}
+                        ></iframe>}
+                    </ReflexElement>
+                </ReflexContainer>}
+                {isMobile && <div className="editor-main">
+                    <div className="editor-m-header">
+                        <button onClick={() => setActivePanel("html")} className={classNames("editor-m-header-button", {"active": activePanel === "html"})}><img src="/assets/images/editor/html.svg" alt="" /> HTML</button>
+                        <button onClick={() => setActivePanel("css")} className={classNames("editor-m-header-button", {"active": activePanel === "css"})}><img src="/assets/images/editor/css.svg" alt="" /> CSS</button>
+                        <button onClick={() => setActivePanel("javascript")} className={classNames("editor-m-header-button", {"active": activePanel === "javascript"})}><img src="/assets/images/editor/javascript.svg" alt="" /> JS</button>
+                        <button onClick={() => setActivePanel("preview")} className={classNames("editor-m-header-button", {"active": activePanel === "preview"})}>Preview</button>
+                    </div>
+                    <div className={classNames("editor-container", { "editor-container-hidden": activePanel !== "html"})}>
+                        <CodeEditor
+                            onMount={() => updateIframeContents(content, false)}
+                            defaultValue={content?.html}
+                            defaultLanguage='html'
+                            language='html'
+                            theme={editorSettings.theme}
+                            onChange={(value) => updateEditorChanges(value, "html")}
+                        />
+                    </div>
+                    <div className={classNames("editor-container", { "editor-container-hidden": activePanel !== "css" })}>
+                        <CodeEditor
+                            defaultValue={content?.css}
+                            defaultLanguage='css'
+                            language='css'
+                            theme={editorSettings.theme}
+                            onChange={(value) => updateEditorChanges(value, "css")}
+                        />
+                    </div>
+                    <div className={classNames("editor-container", { "editor-container-hidden": activePanel !== "javascript" })}>
+                        <CodeEditor
+                            defaultValue={content?.javascript}
+                            defaultLanguage='javascript'
+                            language='javascript'
+                            theme={editorSettings.theme}
+                            onChange={(value) => updateEditorChanges(value, "javascript")}
+                        />
+                    </div>
+                    <div className={classNames("editor-container", { "editor-container-hidden": activePanel !== "preview" })}>
+                        {iframesource !== null && <iframe
+                            className={classNames("editor-iframe")}
+                            src={iframesource}
+                            title={content?.name}
+                            sandbox="allow-scripts"
+                            ref={iFrameElement}
+                            onLoad={(e) => {
+                                e.preventDefault();
+                                pushlog(<><span>Preview loaded</span><i className="far fa-check"></i></>);
+                                if (editorSettings.autoSave) saveButton?.current?.click();
+                                URL.revokeObjectURL(e.target.src);
+                            }}
+                            onError={(e) => {
+                                pushlog(<><span>Preview loading failed</span><i className="far fa-times error"></i></>);
+                                if (editorSettings.autoSave) saveButton?.current?.click();
+                                URL.revokeObjectURL(e.target.src);
+                            }}
+                        ></iframe>}
+                    </div>
+                </div>}
+            </>}
             {!content && <main className="editor-main">
                 {!user && <div className="editor-start">
                     <div className="editor-start-header">Signin to CodePlay</div>
@@ -412,17 +476,29 @@ function Editor({ user = null }) {
             <footer className="editor-footer">
                 {content && <>
                     <div className="editor-footer-flex">
-                        <button className="editor-footer-button" onClick={toggleResourcePanel}>Resources</button>
-                        <button className="editor-footer-button" onClick={toggleShortcutPanel}>Shortcuts</button>
-                        <button className="editor-footer-button" onClick={togglePreviewAspect}>{isPreviewEnlarged ? "Restore" : "Enlarge"} preview</button>
-                        <button className="editor-footer-button" onClick={toggleWindowAspect}>{isWindowFullScreen ? "Exit f" : "F"}ullscreen</button>
+                        <button className="editor-footer-button" onClick={toggleResourcePanel}>{isBrowser ? "Resources" : <i className="fas fa-puzzle-piece"></i>}</button>
+                        {isBrowser && <button className="editor-footer-button" onClick={toggleShortcutPanel}>Shortcuts</button>}
+                        {isBrowser && <button className="editor-footer-button" onClick={togglePreviewAspect}>{isPreviewEnlarged ? "Restore" : "Enlarge"} preview</button>}
+                        <button className="editor-footer-button" onClick={toggleWindowAspect}>
+                            {isBrowser && (`${isWindowFullScreen ? "Exit f" : "F"}ullscreen`)}
+                            {isMobile && (isWindowFullScreen ? <i className="fas fa-compress"></i> : <i className="fas fa-expand"></i>)}
+                        </button>
                     </div>
                     <div className="editor-footer-flex">
                         <div className="editor-footer-loader">{pushlogdata}</div>
-                        <button className="editor-footer-button" onClick={() => updateIframeContents(content, false)}>Build</button>
-                        <button className="editor-footer-button" disabled={exportingZip} onClick={exportContentsAsZip}>{exportingZip ? "Exporting..." : "Export Zip"}</button>
-                        <button className="editor-footer-button" disabled={exportingHTML} onClick={exportContentsAsHTML}>{exportingHTML ? "Exporting..." : "Export Build"}</button>
-                        <a href={`/play/${params.codeid}`} className="editor-footer-button">Play</a>
+                        <button className="editor-footer-button" onClick={() => {
+                            updateIframeContents(content, false);
+                            isMobile && setActivePanel("preview");
+                        }}>{isBrowser ? "Build" : <i className="fas fa-refresh"></i>}</button>
+                        <button className="editor-footer-button" disabled={exportingZip} onClick={exportContentsAsZip}>
+                            {isBrowser && (exportingZip ? "Exporting..." : "Export Zip")}
+                            {isMobile && (exportingZip ? <LoadSVG /> : <i className="fas fa-file-zipper"></i>)}
+                        </button>
+                        <button className="editor-footer-button" disabled={exportingHTML} onClick={exportContentsAsHTML}>
+                            {isBrowser && (exportingHTML ? "Exporting..." : "Export Build")}
+                            {isMobile && (exportingHTML ? <LoadSVG /> : <i className="fas fa-file-code"></i>)}
+                        </button>
+                        <a href={`/play/${params.codeid}`} className="editor-footer-button">{isBrowser ? "Play" : <i className="fas fa-play"></i>}</a>
                     </div></>}
             </footer>
             {codeInvalid !== false && <div className="editor-invalid">

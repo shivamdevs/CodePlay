@@ -162,3 +162,15 @@ body::-webkit-scrollbar-thumb {
         background-color: hsl(200, 20%, 95%);
     }
 }
+
+.contextmenu {
+    border-radius: 8px !important;
+    box-shadow: 0 0 20px 5px #0003;
+}
+.contextmenuitem {
+    padding-block: 15px !important;
+    color: var(--theme-3);
+}
+.contextmenuitem:hover {
+    background-color: #565efa44 !important;
+}

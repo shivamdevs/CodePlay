@@ -3,7 +3,7 @@ import Layer from './Layer';
 
 function Shortcuts({ close = null }) {
     return (
-        <Layer width={400} title={<><i className="far fa-cog"></i> Shortcuts</>} onClose={close}>
+        <Layer width={400} title={<><i className="fas fa-keyboard"></i> Shortcuts</>} onClose={close}>
             <div className="shortcut-body">
                 <div className="shortcut-block">
                     <div className="setting-block-title">Exit panel / fullscreen / preview</div>

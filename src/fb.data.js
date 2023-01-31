@@ -8,9 +8,9 @@ import html2canvas from "html2canvas";
 
 export const table = "codeplay";
 
-export async function getMyCodes(user) {
+export async function getAllCodes(user) {
     try {
-        const q = query(collection(db, table), where("uid", "==", user.uid), where("deleted", "==", false));
+        const q = user ? query(collection(db, table), where("uid", "==", user.uid), where("deleted", "==", false)) : query(collection(db, table));
         const snap = await getDocs(q);
         const result = [];
         if (!snap.empty) {
@@ -28,19 +28,19 @@ export async function getMyCodes(user) {
     }
 }
 
-export async function getAllCodes(user) {
+export async function getAllUsers() {
     try {
-        const q = query(collection(db, table));
+        const q = query(collection(db, "users"));
         const snap = await getDocs(q);
-        const result = [];
+        const result = {};
         if (!snap.empty) {
             snap.docs.forEach((item) => {
-                result.push({ ...item.data(), id: item.id });
+                result[item.id] = item.data();
             });
         }
         return {
             type: "success",
-            data: result.sort(sortBy("updated")).reverse(),
+            data: result,
         }
     } catch (err) {
         console.error(err);

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { isBrowser, isMobile } from 'react-device-detect';
 import { Link, useParams } from 'react-router-dom';
 import app from '../../app.data';
 import { getDisplayDate, setTitle } from '../../app.functions';
@@ -71,18 +72,27 @@ function Player() {
                     </div>
                 </div>
             </div>}
-            <footer className="editor-footer">
-                <div className="editor-footer-flex">
-                    <Link to="/" className="editor-footer-button">CodePlay Home</Link>
-                    {content && <a href={`/code/${params.playid}`} className="editor-footer-button">View Source code</a>}
-                    <a href="/code/new" className="editor-footer-button">Create new code</a>
+            <footer className="editor-footer player-footer">
+                {isMobile && <div className="player-footer-flex-full">
                     {coderData && <div className="editor-footer-loader">By: {coderData.name}</div>}
                     {content && <div className="editor-footer-loader">Created: {getDisplayDate(content.created)}</div>}
                     {content && <div className="editor-footer-loader">Updated: {getDisplayDate(content.updated)}</div>}
-                </div>
-                <div className="editor-footer-flex">
-                    <div className="editor-footer-loader">© {app.parent} @2023-{new Date().getFullYear()}</div>
-                    {content && <Link to={`/report/${params.playid}`} className="editor-footer-button">Report play</Link>}
+                </div>}
+                <div className="player-footer-flex-full">
+                    <div className="editor-footer-flex">
+                        <Link to="/" className="editor-footer-button">{isBrowser ? "CodePlay Home" : <i className="fas fa-home"></i>}</Link>
+                        {content && <a href={`/code/${params.playid}`} className="editor-footer-button">{isBrowser ? "View Source code" : <i className="fas fa-code"></i>}</a>}
+                        <a href="/code/new" className="editor-footer-button">{isBrowser ? "Create new code" : <i className="fas fa-plus"></i>}</a>
+                        {isBrowser && <>
+                            {coderData && <div className="editor-footer-loader">By: {coderData.name}</div>}
+                            {content && <div className="editor-footer-loader">Created: {getDisplayDate(content.created)}</div>}
+                            {content && <div className="editor-footer-loader">Updated: {getDisplayDate(content.updated)}</div>}
+                        </>}
+                    </div>
+                    <div className="editor-footer-flex">
+                        <div className="editor-footer-loader">© {app.parent} @2023-{new Date().getFullYear()}</div>
+                        {content && <Link to={`/report/${params.playid}`} className="editor-footer-button">{isBrowser ? "Report play" : <i className="fas fa-flag-swallowtail"></i>}</Link>}
+                    </div>
                 </div>
             </footer>
         </section>

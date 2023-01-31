@@ -12,9 +12,24 @@
     display: block;
     flex: 1;
     width: 100%;
-    height: calc(100% - 50px);
+    height: fill-available;
     border: none;
+}
+.player-footer {
+    height: initial !important;
+    flex-direction: column;
+    gap: 5px;
 }
 .player .editor-footer {
     margin-top: auto;
+}
+.player-footer-flex-full {
+    display: inline-flex;
+    width: 100%;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.player-footer .editor-footer-loader {
+    font-size: 10px;
 }

@@ -1,4 +1,5 @@
 import React from 'react';
+import { isBrowser } from 'react-device-detect';
 import ReactDropdown from 'react-dropdown';
 import app from '../../app.data';
 import Switch from '../../components/switch/Switch';
@@ -60,7 +61,7 @@ function Settings({ settings = {}, update = null, close = null }) {
                         }}>Restore settings</button>
                     </div>
                 </div>
-                <div className="setting-block">
+                {isBrowser && <div className="setting-block">
                     <div className="setting-block-left">
                         <div className="setting-block-title">Reset resizes</div>
                         <div className="setting-block-subtitle">Reset the width of resized editor</div>
@@ -71,7 +72,7 @@ function Settings({ settings = {}, update = null, close = null }) {
                             if (window.localStorage) window.localStorage.setItem(`${app.bucket}editor:resize:data`, JSON.stringify({}));
                         }}>Restore resize</button>
                     </div>
-                </div>
+                </div>}
             </div>
         </Layer>
     );

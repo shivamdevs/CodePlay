@@ -53,10 +53,14 @@ function Resourse({ item = null, setter = null, index = null }) {
         <div className="resource-item">
             <div className="resource-item-branch"></div>
             <div className="resource-item-content">
-                <ReactDropdown className="resource-item-dropdown" onChange={({value}) => updateResource("position", value)} options={["head", "body"]} value={item.position} />
-                <ReactDropdown className="resource-item-dropdown" onChange={({ value }) => updateResource("type", value)} options={["stylesheet", "script", "element"]} value={item.type} />
-                <input className="resource-item-input" placeholder="Enter source..." onChange={({ target }) => updateResource("content", target.value)} defaultValue={item.content} type="text" />
-                <button className="resource-item-remove" onClick={removeResource}><i className="fas fa-trash"></i></button>
+                <div className="resource-item-flex">
+                    <ReactDropdown className="resource-item-dropdown" onChange={({ value }) => updateResource("position", value)} options={["head", "body"]} value={item.position} />
+                    <ReactDropdown className="resource-item-dropdown" onChange={({ value }) => updateResource("type", value)} options={["stylesheet", "script", "element"]} value={item.type} />
+                </div>
+                <div className="resource-item-flex">
+                    <input className="resource-item-input" placeholder="Enter source..." onChange={({ target }) => updateResource("content", target.value)} defaultValue={item.content} type="text" />
+                    <button className="resource-item-remove" onClick={removeResource}><i className="fas fa-trash"></i></button>
+                </div>
             </div>
         </div>
     );

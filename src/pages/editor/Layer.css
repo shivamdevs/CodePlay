@@ -111,10 +111,16 @@
     display: flex;
     width: calc(100% - 40px);
     align-items: stretch;
-    flex-wrap: nowrap;
-    gap: 5px;
+    flex-wrap: wrap;
+    gap: 10px;
     justify-content: space-between;
     padding-left: 10px;
+}
+.resource-item-flex {
+    align-items: stretch;
+    gap: 5px;
+    display: inline-flex;
+    flex-wrap: nowrap;
 }
 .resource-item-add {
     display: inline-flex;
@@ -203,6 +209,11 @@
 .setting-body {
     padding: 20px;
 }
+@media screen and (max-width: 768px) {
+    .setting-body {
+        padding-inline: 10px;
+    }
+}
 .setting-block {
     display: flex;
     align-items: baseline;
@@ -221,6 +232,7 @@
     flex: .6;
 }
 .setting-block-right {
+    min-width: 140px;
     flex: .4;
 }
 .setting-block-title {

@@ -41,6 +41,7 @@ function Header({ user = null }) {
                         </Link>
                     </div>
                     <NavLink className="header-button" to="/">Home</NavLink>
+                    {user && <NavLink className="header-button" to="/cp">Dashboard</NavLink>}
                     <NavLink className="header-button" to="/play">Plays</NavLink>
                     <NavLink className="header-button" to="/code">Code</NavLink>
                     {/* <NavLink className="header-button" to="/support">Support</NavLink> */}
@@ -53,7 +54,8 @@ function Header({ user = null }) {
             {user && <>
                 <ContextMenuTrigger trigger='click' exact={false} menu="profile-menu" className="roundbutton header-photo"><img src={user.photoURL} alt="" /></ContextMenuTrigger>
                 <ContextMenu className="contextmenu"  menu="profile-menu">
-                    <ContextMenuItem  className="contextmenuitem" onClick={(data) => navigate(`/accounts/profile`)}><i className="fas fa-fw fa-user"></i><span>Profile</span></ContextMenuItem>
+                    <ContextMenuItem className="contextmenuitem" onClick={(data) => navigate(`/cp`)}><i className="fas fa-fw fa-user"></i><span>CodePlay Dashboard</span></ContextMenuItem>
+                    <ContextMenuItem className="contextmenuitem" onClick={(data) => navigate(`/accounts/profile`)}><i className="fas fa-fw fa-user-pen"></i><span>Edit public profile</span></ContextMenuItem>
                     <ContextMenuItem  className="contextmenuitem" onClick={logout}><i className="fas fa-fw fa-power-off"></i><span>Logout</span></ContextMenuItem>
                 </ContextMenu>
             </>}

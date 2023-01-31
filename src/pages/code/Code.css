@@ -1,6 +1,5 @@
 .code-wallet {
     padding-block: 20px;
-    max-width: 1000px;
     width: 100%;
     margin-inline: auto;
 }
@@ -20,91 +19,6 @@
 .code-title-options {
     display: inline-flex;
     gap: 10px;
-}
-
-.code-loading {
-    display: flex;
-    justify-content: center;
-    padding-block: 50px;
-    font-size: 14px;
-    color: #727888;
-}
-
-.code-loading>svg {
-    width: 50px;
-    height: 50px;
-}
-
-.code-viewer:has(.code-block) {
-    display: flex;
-    flex-wrap: wrap;
-    padding: 5px;
-}
-
-.code-block {
-    display: inline-flex;
-    flex-direction: column;
-    width: 50%;
-    min-width: 150px;
-    max-width: 33%;
-    box-shadow: 0 0 10px #0002;
-    border-radius: 10px;
-    text-decoration: none;
-    overflow: hidden;
-    padding-bottom: 10px;
-    scale: .9;
-    transition: .2s;
-}
-
-.code-block-item {
-    width: 100%;
-    max-width: 100%;
-    flex-direction: row;
-}
-
-.code-block>img {
-    height: 300px;
-    object-fit: cover;
-}
-
-.code-block-item>img {
-    width: 100px;
-    height: 100%;
-}
-
-@media screen and (max-width: 767px) {
-    .code-block>img {
-        height: 200px;
-    }
-}
-
-.code-block>div {
-    padding: 0 20px;
-}
-
-.code-block-name {
-    color: var(--theme-3);
-    font-size: 20px;
-    margin-block: 10px;
-}
-
-.code-block-date {
-    font-size: 12px;
-    margin-bottom: 5px;
-    color: #727888;
-}
-
-.code-block:hover {
-    box-shadow: 0 0 10px 5px #0003;
-    cursor: pointer;
-    scale: 1;
-}
-
-.code-block-delete {
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-    color: red;
 }
 
 .code-verify {

@@ -5,6 +5,7 @@ const app = {
     parent: "Oasis Tech",
     copyright: '© Oasis Tech',
     location: 'Made with ❤️ in India',
+    maxlength: 20,
 };
 
 export default app;

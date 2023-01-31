@@ -37,6 +37,12 @@
     height: 40px;
 }
 
+@media screen and (max-width: 767px) {
+    .editor-header-data {
+        max-width: 170px;
+    }
+}
+
 .editor-header-hidden {
     visibility: hidden;
     font-size: 20px;
@@ -171,6 +177,9 @@
     flex: 1;
     height: 100%;
     overflow: hidden;
+}
+.editor-container-hidden {
+    display: none;
 }
 
 .editor-iframe {
@@ -340,4 +349,33 @@
 }
 .editor-start-option > * {
     flex: .4;
+}
+
+.editor-m-header {
+    display: flex;
+    border-bottom: 1px solid #1c262e;
+    flex-wrap: nowrap;
+}
+.editor-m-header-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    gap: 10px;
+    font-size: 14px;
+    color: #727888;
+    background-color: #0e1820;
+    border: none;
+    padding: 5px;
+    border-right: 1px solid #1c262e;
+}
+.editor-m-header-button:last-child {
+    border-right: none;
+}
+.editor-m-header-button.active {
+    color: #fff;
+    background-color: #1c262e;
+}
+.editor-m-header-button > img {
+    width: 15px;
 }
