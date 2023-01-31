@@ -73,6 +73,7 @@ function Player() {
             </div>}
             <footer className="editor-footer">
                 <div className="editor-footer-flex">
+                    <Link to="/" className="editor-footer-button">CodePlay Home</Link>
                     {content && <a href={`/code/${params.playid}`} className="editor-footer-button">View Source code</a>}
                     <a href="/code/new" className="editor-footer-button">Create new code</a>
                     {coderData && <div className="editor-footer-loader">By: {coderData.name}</div>}
