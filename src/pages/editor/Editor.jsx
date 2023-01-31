@@ -290,6 +290,10 @@ function Editor({ user = null }) {
                 toggleShortcutPanel();
             } else if (key === 70 && e.altKey) {
                 toggleWindowAspect();
+            } else if (key === 72 && e.altKey) {
+                exportContentsAsZip();
+            } else if (key === 66 && e.altKey) {
+                exportContentsAsHTML();
             } else if (key === 71 && e.altKey) {
                 updateEditorSettings("flipDirection", !editorSettings.flipDirection);
             } else {
@@ -299,7 +303,7 @@ function Editor({ user = null }) {
         }
         window.addEventListener("keydown", handle);
         return () => window.removeEventListener("keydown", handle);
-    }, [editorSettings.flipDirection, isPreviewEnlarged, isResourceOpen, togglePreviewAspect, toggleResourcePanel, toggleSettingsPanel, toggleShortcutPanel]);
+    }, [editorSettings.flipDirection, exportContentsAsHTML, exportContentsAsZip, isPreviewEnlarged, isResourceOpen, togglePreviewAspect, toggleResourcePanel, toggleSettingsPanel, toggleShortcutPanel]);
 
     return (
         <section className="editor" ref={sectionElement}>
@@ -308,7 +312,7 @@ function Editor({ user = null }) {
                     <a href="/"><img src="/logo.png" alt="" className="editor-header-logo" /></a>
                     {content && <form onSubmit={(e) => { e.preventDefault(); e.target[0].blur(); }} className="editor-header-data">
                         <span className="editor-header-hidden">{{ ...content }.name}</span>
-                        <input className="editor-header-name" onBlur={({ target }) => setContent(old => {
+                        <input className="editor-header-name" title={content?.name} onBlur={({ target }) => setContent(old => {
                             const x = { ...old };
                             x.name = target.value.trim();
                             if (x.name === "") {
@@ -320,7 +324,7 @@ function Editor({ user = null }) {
                             target.previousElementSibling.innerHTML = target.value;
                             setContentSaved(false);
                         }} />
-                        {coderData && <a href={`/cp/${coderData.uid}`} className="editor-header-user">By: {coderData.name}</a>}
+                        {coderData && <a href={`/cp/${coderData.uid}`} title={coderData.name} className="editor-header-user">By: {coderData.name}</a>}
                     </form>}
                 </div>
                 {content && <div className="editor-header-flex">

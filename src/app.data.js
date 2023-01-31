@@ -1,6 +1,6 @@
 const app = {
     name: 'CodePlay',
-    version: '1.0.0',
+    version: '1.0.1',
     bucket: "code:play:",
     parent: "Oasis Tech",
     copyright: '© Oasis Tech',

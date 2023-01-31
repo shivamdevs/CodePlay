@@ -35,11 +35,19 @@ function Shortcuts({ close = null }) {
                 </div>
                 <div className="shortcut-block">
                     <div className="setting-block-title">Fullscreen toggle</div>
-                    <kbd className="shortcut-key">Ctrl + F</kbd>
+                    <kbd className="shortcut-key">Alt + F</kbd>
                 </div>
                 <div className="shortcut-block">
                     <div className="setting-block-title">Pane view toggle</div>
-                    <kbd className="shortcut-key">Ctrl + G</kbd>
+                    <kbd className="shortcut-key">Alt + G</kbd>
+                </div>
+                <div className="shortcut-block">
+                    <div className="setting-block-title">Export as Zip</div>
+                    <kbd className="shortcut-key">Alt + B</kbd>
+                </div>
+                <div className="shortcut-block">
+                    <div className="setting-block-title">Export HTML build</div>
+                    <kbd className="shortcut-key">Alt + H</kbd>
                 </div>
             </div>
         </Layer>
