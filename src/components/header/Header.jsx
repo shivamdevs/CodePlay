@@ -53,7 +53,7 @@ function Header({ user = null }) {
             {user && <>
                 <ContextMenuTrigger trigger='click' exact={false} menu="profile-menu" className="roundbutton header-photo"><img src={user.photoURL} alt="" /></ContextMenuTrigger>
                 <ContextMenu className="contextmenu"  menu="profile-menu">
-                    <ContextMenuItem  className="contextmenuitem" onClick={(data) => navigate(`/accounts/profile`)}><i className="fas fa-fw fa-delete-left"></i><span>Profile</span></ContextMenuItem>
+                    <ContextMenuItem  className="contextmenuitem" onClick={(data) => navigate(`/accounts/profile`)}><i className="fas fa-fw fa-user"></i><span>Profile</span></ContextMenuItem>
                     <ContextMenuItem  className="contextmenuitem" onClick={logout}><i className="fas fa-fw fa-power-off"></i><span>Logout</span></ContextMenuItem>
                 </ContextMenu>
             </>}
