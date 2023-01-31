@@ -1,0 +1,32 @@
+.switch {
+    display: inline-flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    padding: 2px;
+    width: 50px;
+    height: 25px;
+    background-color: #0003;
+    border-radius: 12.5px;
+    transition: .2s;
+}
+.switch:hover {
+    background-color: #0006;
+    cursor: pointer;
+    box-shadow: 0 0 0 1px #fff1;
+}
+.switch-toggle {
+    width: 21px;
+    height: 21px;
+    border-radius: 50%;
+    background-color: #2e364c;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+}
+.switch-toggle-on {
+    background-color: green;
+}
+.switch:has(>.switch-toggle-on) {
+    justify-content: flex-end;
+}

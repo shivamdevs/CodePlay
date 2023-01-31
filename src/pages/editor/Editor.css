@@ -1,0 +1,343 @@
+.editor {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    inset: 0;
+    background-color: #071017;
+    color: #fff;
+}
+
+.editor-header {
+    width: 100%;
+    height: 65px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #0e1820;
+    border-bottom: 1px solid #1c262e;
+    padding: 5px;
+}
+
+.editor-header-flex {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: space-between;
+}
+
+.editor-header-logo {
+    height: 50px;
+    width: 50px;
+}
+
+.editor-header-data {
+    position: relative;
+    min-width: 100px;
+    max-width: 300px;
+    height: 40px;
+}
+
+.editor-header-hidden {
+    visibility: hidden;
+    font-size: 20px;
+    padding-inline: 5px;
+    width: 100%;
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.editor-header-user {
+    display: inline-block;
+    margin-top: auto;
+    font-size: 13px;
+    color: #727888;
+    position: absolute;
+    inset: auto 0 -7px 0;
+    padding-inline: 5px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.editor-header-name {
+    font-size: 18px;
+    cursor: pointer;
+    background-color: transparent;
+    color: inherit;
+    border: none;
+    display: inline-flex;
+    position: absolute;
+    inset: 0 0 auto 0;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.editor-header-name:focus {
+    outline: 2px solid #1c262e;
+    background-color: #071017;
+}
+
+.editor-main {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    width: 100%;
+    max-height: calc(100% - 115px);
+    flex: 1;
+}
+
+.editor-splitter-x {
+    display: none;
+}
+
+.horizontal>.editor-splitter-y {
+    height: 8px !important;
+    background-color: #1c262e !important;
+    border-top: 1px solid #fff1 !important;
+    border-bottom: 1px solid #fff1 !important;
+}
+
+.vertical>.editor-splitter-y {
+    width: 8px !important;
+    background-color: #1c262e !important;
+    border-left: 1px solid #fff1 !important;
+    border-right: 1px solid #fff1 !important;
+}
+
+.editor-splitter-y:hover,
+.editor-splitter-y.active {
+    background-color: var(--theme-3) !important;
+}
+
+.editor-resize-panel {
+    display: flex;
+    flex-flow: nowrap;
+    overflow: hidden !important;
+}
+
+.horizontal>.editor-resize-panel {
+    flex-direction: column;
+}
+
+.editor-resize-handle {
+    font-size: 12px;
+    color: #727888;
+    flex: 1;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    cursor: default;
+    user-select: none;
+    background-color: #1c262e;
+}
+
+.vertical>.editor-resize-handle {
+    padding: 10px 1px;
+    border-left: 1px solid #fff1;
+    border-right: 1px solid #fff1;
+    height: 100%;
+    max-width: 20px;
+    min-width: 20px;
+    writing-mode: vertical-lr;
+    text-orientation: mixed;
+}
+
+.horizontal>.editor-resize-handle {
+    padding: 1px 10px;
+    border-top: 1px solid #fff1;
+    border-bottom: 1px solid #fff1;
+    width: 100%;
+    max-height: 20px;
+    min-height: 20px;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 10px;
+}
+
+.editor-resize-handle>img {
+    border-radius: 4px;
+    max-width: 16px;
+    max-height: 16px;
+}
+.vertical>.editor-resize-handle>img {
+    margin-bottom: 10px;
+}
+
+.editor-container {
+    position: relative;
+    flex: 1;
+    height: 100%;
+    overflow: hidden;
+}
+
+.editor-iframe {
+    position: absolute;
+    inset: -0.1px;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    border: none;
+}
+.editor-iframe-enlarged {
+    position: fixed;
+    inset: 65px 0 49px 0;
+    z-index: 111;
+    height: calc(100% - 114px);
+}
+.editor-footer {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #0e1820;
+    border-top: 1px solid #1c262e;
+    padding: 10px;
+}
+
+.editor-footer-flex {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: space-between;
+}
+
+.editor-footer-button {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+    background-color: #1c262e;
+    color: #727888;
+    padding: 8px 10px;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: .2s;
+    font-size: 12px;
+    border: none;
+}
+
+.editor-footer-button:hover,
+.editor-footer-button:active {
+    color: #fff;
+    cursor: pointer;
+}
+
+.editor-footer-loader {
+    color: #727888;
+    font-size: 12px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: nowrap;
+}
+
+.editor-footer-loader>i,
+.editor-footer-loader>svg {
+    font-size: 18px;
+    color: dodgerblue;
+}
+
+.editor-footer-loader>i.error {
+    color: red;
+}
+
+.editor-footer-loader>i.success {
+    color: green;
+}
+
+.editor-invalid {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+    width: 100%;
+    background-color: #0007;
+    position: fixed;
+    inset: 0;
+    padding: 10px;
+}
+
+.editor-invalid-box {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 370px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px 5px #0003;
+}
+
+.editor-invalid-header {
+    display: inline-flex;
+    gap: 20px;
+    align-items: center;
+    font-size: 25px;
+    color: var(--theme-3);
+}
+
+.editor-invalid-header>img {
+    width: 50px;
+}
+
+.editor-invalid-error {
+    font-size: 18px;
+    color: red;
+    text-align: center;
+    margin-block: 20px;
+}
+
+.editor-invalid-option {
+    display: flex;
+    justify-content: space-around;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.editor-start-wrapper {
+    margin-block: auto;
+    padding-block: 50px;
+}
+.editor-start {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    background-color: #1c262e;
+    border-radius: 10px;
+    box-shadow: 0 0 10px 5px #0004;
+}
+.editor-start-wrapper >.editor-start {
+    background-color: #fff;
+}
+.editor-start-header {
+    font-size: 25px;
+    color: var(--theme-1);
+    margin-block: 10px;
+    text-align: center;
+}
+
+.editor-start-subheader {
+    font-size: 15px;
+    color: #727888;
+    margin-block: 10px;
+    text-align: center;
+}
+
+.editor-start-option {
+    display: flex;
+    margin-block: 20px 10px;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.editor-start-option > * {
+    flex: .4;
+}

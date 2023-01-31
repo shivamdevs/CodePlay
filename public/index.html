@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no, height=device-height, user-scalable=no" />
+  <meta name="theme-color" content="#141e26" />
+  <meta name="description" content="HTML coding playground." />
+  <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+  <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+  <link rel="stylesheet" href="https://assets.myoasis.tech/icons/font-awesome-6/css/all.min.css">
+  <title>CodePlay</title>
+  <style>
+    #pre-loading-screen {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      position: fixed;
+      z-index: 11111111;
+      inset: 0;
+      background-color: #fff;
+    }
+
+    #pre-loading-screen>img {
+      width: 80px;
+      height: 80px;
+      margin-block: auto;
+    }
+  </style>
+</head>
+
+<body>
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <div id="root"></div>
+  <div id="pre-loading-screen">
+    <img src="%PUBLIC_URL%/logo.png" alt="">
+  </div>
+</body>
+
+</html>
+<script>
+  window.addEventListener("load", () => {
+    const p = document.querySelector("#pre-loading-screen");
+    if (p && document.contains(p)) p.parentElement.removeChild(p);
+  });
+</script>

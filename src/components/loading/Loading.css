@@ -1,0 +1,15 @@
+.loading-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: fixed;
+    z-index: 11111111;
+    inset: 0;
+    background-color: #fff;
+}
+.loading-wrapper > img {
+    width: 80px;
+    height: 80px;
+    margin-block: auto;
+}

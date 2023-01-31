@@ -1,0 +1,22 @@
+.swapper {
+    position: relative;
+    display: inline-block;
+    padding-right: 18px;
+}
+.swapper-cursor {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    height: 3px;
+    width: 15px;
+    background-color: #fff;
+    /* animation: blink .7s infinite linear; */
+}
+@keyframes blink {
+    0%, 30%, 70%, 100% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+}

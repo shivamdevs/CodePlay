@@ -1,0 +1,20 @@
+.player {
+    position: fixed;
+    z-index: 9999;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    inset: 0;
+    background-color: #071017;
+}
+.player-frame {
+    display: block;
+    flex: 1;
+    width: 100%;
+    height: calc(100% - 50px);
+    border: none;
+}
+.player .editor-footer {
+    margin-top: auto;
+}
