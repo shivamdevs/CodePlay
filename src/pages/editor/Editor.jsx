@@ -299,7 +299,7 @@ function Editor({ user = null }) {
             } else if (key === 71 && e.altKey) {
                 updateEditorSettings("flipDirection", !editorSettings.flipDirection);
             } else {
-                return console.log(key, e.key);
+                return;
             }
             e.preventDefault();
         }
@@ -394,7 +394,7 @@ function Editor({ user = null }) {
                             allowFullScreen={true}
                             allowtransparency="true"
                             allowpaymentrequest="true"
-                            allow="autoplay; camera; microphone"
+                            allow="autoplay *; camera *; microphone *; geolocation *"
                             sandbox="allow-downloads allow-forms allow-modals allow-orientation-lock allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-presentation allow-scripts allow-top-navigation allow-top-navigation-by-user-activation"
                             ref={iFrameElement}
                             onLoad={(e) => {
@@ -454,7 +454,7 @@ function Editor({ user = null }) {
                             allowFullScreen={true}
                             allowtransparency="true"
                             allowpaymentrequest="true"
-                            allow="autoplay; camera; microphone"
+                            allow="autoplay *; camera *; microphone *; geolocation *"
                             sandbox="allow-downloads allow-forms allow-modals allow-orientation-lock allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-presentation allow-scripts allow-top-navigation allow-top-navigation-by-user-activation"
                             ref={iFrameElement}
                             onLoad={(e) => {
