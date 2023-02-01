@@ -1,3 +1,4 @@
+import copy from 'copy-to-clipboard';
 import React, { useEffect, useState } from 'react';
 import { isBrowser, isMobile } from 'react-device-detect';
 import { Link, useParams } from 'react-router-dom';
@@ -51,6 +52,7 @@ function Player() {
                 className="player-frame"
                 src={iframesource}
                 title={content?.name}
+                sandbox="allow-forms allow-modals allow-orientation-lock allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-presentation allow-same-origin allow-scripts allow-top-navigation allow-top-navigation-by-user-activation"
                 onLoad={(e) => {
                     e.preventDefault();
                     // URL.revokeObjectURL(iframesource);
@@ -83,6 +85,7 @@ function Player() {
                         <Link to="/" className="editor-footer-button">{isBrowser ? "CodePlay Home" : <i className="fas fa-home"></i>}</Link>
                         {content && <a href={`/code/${params.playid}`} className="editor-footer-button">{isBrowser ? "View Source code" : <i className="fas fa-code"></i>}</a>}
                         <a href="/code/new" className="editor-footer-button">{isBrowser ? "Create new code" : <i className="fas fa-plus"></i>}</a>
+                        <button className="editor-footer-button" onClick={() => copy(window.location.href)}>{isBrowser ? "Copy link" : <i className="far fa-copy"></i>}</button>
                         {isBrowser && <>
                             {coderData && <div className="editor-footer-loader">By: {coderData.name}</div>}
                             {content && <div className="editor-footer-loader">Created: {getDisplayDate(content.created)}</div>}

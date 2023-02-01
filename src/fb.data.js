@@ -85,6 +85,7 @@ export async function getCodePlayPreview(content) {
     return new Promise((resolve) => {
         const url = createFrameSourceURL(content);
         const frame = document.createElement("iframe");
+        frame.setAttribute("sandbox", "allow-forms allow-modals allow-orientation-lock allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-presentation allow-same-origin allow-scripts allow-top-navigation allow-top-navigation-by-user-activation");
         frame.style.zIndex = "-111111111111111";
         frame.style.position = "fixed";
         frame.style.top = "0";

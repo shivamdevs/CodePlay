@@ -17,6 +17,7 @@ import Shortcuts from './Shortcuts';
 import JSZip from 'jszip';
 import { saveAs } from 'file-saver';
 import { isBrowser, isMobile } from 'react-device-detect';
+import copy from 'copy-to-clipboard';
 
 function Editor({ user = null }) {
     const params = useParams();
@@ -390,7 +391,7 @@ function Editor({ user = null }) {
                             className={classNames("editor-iframe", { "editor-iframe-enlarged": isPreviewEnlarged })}
                             src={iframesource}
                             title={content?.name}
-                            sandbox="allow-scripts"
+                            sandbox="allow-forms allow-modals allow-orientation-lock allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-presentation allow-same-origin allow-scripts allow-top-navigation allow-top-navigation-by-user-activation"
                             ref={iFrameElement}
                             onLoad={(e) => {
                                 e.preventDefault();
@@ -446,7 +447,7 @@ function Editor({ user = null }) {
                             className={classNames("editor-iframe")}
                             src={iframesource}
                             title={content?.name}
-                            sandbox="allow-scripts"
+                            sandbox="allow-forms allow-modals allow-orientation-lock allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-presentation allow-same-origin allow-scripts allow-top-navigation allow-top-navigation-by-user-activation"
                             ref={iFrameElement}
                             onLoad={(e) => {
                                 e.preventDefault();
@@ -498,6 +499,7 @@ function Editor({ user = null }) {
                             {isBrowser && (exportingHTML ? "Exporting..." : "Export Build")}
                             {isMobile && (exportingHTML ? <LoadSVG /> : <i className="fas fa-file-code"></i>)}
                         </button>
+                        <button className="editor-footer-button" onClick={() => copy(window.location.href)}>{isBrowser ? "Copy link" : <i className="far fa-copy"></i>}</button>
                         <a href={`/play/${params.codeid}`} className="editor-footer-button">{isBrowser ? "Play" : <i className="fas fa-play"></i>}</a>
                     </div></>}
             </footer>
