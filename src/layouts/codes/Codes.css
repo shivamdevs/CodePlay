@@ -4,6 +4,7 @@
     justify-content: flex-end;
     padding-right: 15px;
 }
+
 .code-search-box {
     display: inline-flex;
     position: relative;
@@ -13,11 +14,13 @@
     overflow: hidden;
     color: #727888;
 }
+
 .code-search-box .fa-search {
     position: absolute;
     top: 10px;
     left: 10px;
 }
+
 .code-search-input {
     background: none;
     border: none;
@@ -45,7 +48,6 @@
     display: flex;
     flex-wrap: wrap;
     align-items: stretch;
-    justify-content: space-around;
     padding: 5px;
 }
 
@@ -54,6 +56,7 @@
     flex-direction: column;
     width: 50%;
     min-width: 100px;
+    justify-self: stretch;
     max-width: 300px;
     box-shadow: 0 0 10px #0002;
     border-radius: 10px;
@@ -68,6 +71,7 @@
     height: 150px;
     object-fit: cover;
 }
+
 @media screen and (max-width: 491px) {
     .code-block {
         width: 100%;
@@ -84,9 +88,11 @@
     font-size: 20px;
     margin-block: 10px;
 }
-.code-block-name + .code-block-date {
+
+.code-block-name+.code-block-date {
     margin-top: autoy;
 }
+
 .code-block-date {
     font-size: 12px;
     margin-bottom: 5px;
@@ -104,4 +110,53 @@
     bottom: 10px;
     right: 10px;
     color: red;
+}
+.code-navigate-block {
+    width: 100%;
+    min-width: 100%;
+    margin-top: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.code-navigate {
+    max-width: 100%;
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    align-items: center;
+    padding: 0;
+    border: 1px solid #727888;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.code-navigate li > a {
+    display: inline-flex;
+    padding: 10px;
+    min-width: 40px;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border-inline: 1px solid #727888;
+    gap: 10px;
+    color: var(--theme-3);
+    transition: .2s;
+}
+.code-navigate li:not(.selected):not(.disabled)>a:hover {
+    background-color: #56adfa35;
+}
+.code-navigate .disabled a,
+.code-navigate .selected a {
+    opacity: .6;
+    cursor: not-allowed;
+}
+
+.code-navigate .previous a {
+    border-left: none;
+}
+
+.code-navigate .next a {
+    border-right: none;
 }

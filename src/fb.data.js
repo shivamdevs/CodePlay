@@ -10,7 +10,7 @@ export const table = "codeplay";
 
 export async function getAllCodes(user) {
     try {
-        const q = user ? query(collection(db, table), where("uid", "==", user.uid), where("deleted", "==", false)) : query(collection(db, table));
+        const q = user ? query(collection(db, table), where("uid", "==", user.uid || user), where("deleted", "==", false)) : query(collection(db, table));
         const snap = await getDocs(q);
         const result = [];
         if (!snap.empty) {

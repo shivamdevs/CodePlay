@@ -11,7 +11,7 @@ function Play({user = null}) {
                 <div className="code-title-options">
                 </div>
             </div>
-            <Codes user={user} coder={null} />
+            <Codes user={null} coder={null} />
         </div>
     );
 };

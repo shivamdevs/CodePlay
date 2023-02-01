@@ -16,7 +16,7 @@ function Default({ user = null }) {
                     <Route path="/play" element={<Play user={user} />} />
                     <Route path="/code" element={<Code user={user} />} />
                     <Route path="/cp" exact element={<Navigate to={user ? `/cp/${user.uid}` : "/"} replace />} />
-                    <Route path="/cp/*" element={<Profile user={user} />} />
+                    <Route path="/cp/:coderid" element={<Profile user={user} />} />
                     <Route exact path="/" element={<Home user={user} />} />
                 </Routes>
             </main>

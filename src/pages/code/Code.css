@@ -84,34 +84,3 @@
 .code-verify-delete:active {
     background-color: rgb(196, 55, 55) !important;
 }
-
-
-
-.code-navigate {
-    margin-top: 60px;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    list-style: none;
-}
-.code-navigate li {
-    display: inline-flex;
-    padding: 10px;
-    min-width: 40px;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba(63, 114, 202, 0.611);
-    border: 1px solid var(--theme-3);
-    border-left: none;
-    cursor: pointer;
-}
-.code-navigate .disabled {
-    opacity: .6;
-}
-.code-navigate .previous {
-    border-left: 1px solid var(--theme-3);
-    border-radius: 10px 0 0 10px;
-}
-.code-navigate .next {
-    border-radius: 0 10px 10px 0;
-}
