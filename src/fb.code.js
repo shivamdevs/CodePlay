@@ -18,27 +18,27 @@ export function getMarkup(data) {
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>${data?.name}</title>
-            ${(resources && resources.head && resources.head?.length > 0 && resources.head.map(head => {
+            ${((resources && resources.head && resources.head?.length > 0) && resources.head.map(head => {
                 if (head.type === "stylesheet") {
-                    return `<link rel="stylesheet" href="${head.content}">`;
+                    return `<link rel="stylesheet" href="${head.content}" />`;
                 } else if (head.type === "script") {
                     return `<script src="${head.content}"></script>`;
                 }
                 return head.content;
-            })) || ""}
+            }).join("")) || ""}
             <style>${data?.css}</style>
         </head>
         <body>${data?.html || ""}</body>
         </html>
-        ${(resources && resources.body && resources.body?.length > 0 && resources.body.map(body => {
+        ${((resources && resources.body && resources.body?.length > 0) && resources.body.map(body => {
             if (body.type === "stylesheet") {
-                return `<link rel="stylesheet" href="${body.content}">`;
+                return `<link rel="stylesheet" href="${body.content}" />`;
             } else if (body.type === "script") {
                 return `<script src="${body.content}"></script>`;
             }
             return body.content;
-        })) || ""}
-        <script>${data?.javascript || ""}</script>
+        }).join("")) || ""}
+        <script>${data?.javascript}</script>
     `;
 }
 export function getMarkupHTML(data) {
@@ -51,26 +51,26 @@ export function getMarkupHTML(data) {
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>${data?.name}</title>
-            ${(resources && resources.head && resources.head?.length > 0 && resources.head.map(head => {
+            ${((resources && resources.head && resources.head?.length > 0) && resources.head.map(head => {
                 if (head.type === "stylesheet") {
-                    return `<link rel="stylesheet" href="${head.content}">`;
+                    return `<link rel="stylesheet" href="${head.content}" />`;
                 } else if (head.type === "script") {
                     return `<script src="${head.content}"></script>`;
                 }
                 return head.content;
-            })).join("") || ""}
+            }).join("")) || ""}
             <link rel="stylesheet" href="./styles.css">
         </head>
         <body>${data?.html || ""}</body>
         </html>
-        ${(resources && resources.body && resources.body?.length > 0 && resources.body.map(body => {
+        ${((resources && resources.body && resources.body?.length > 0) && resources.body.map(body => {
             if (body.type === "stylesheet") {
-                return `<link rel="stylesheet" href="${body.content}">`;
+                return `<link rel="stylesheet" href="${body.content}" />`;
             } else if (body.type === "script") {
                 return `<script src="${body.content}"></script>`;
             }
             return body.content;
-        })).join("") || ""}
+        }).join("")) || ""}
         <script src="./script.js"></script>
     `
 }
