@@ -89,6 +89,7 @@ export async function getCodePlayPreview(content) {
         frame.setAttribute("allowfullscreen", "true");
         frame.setAttribute("allowtransparency", "true");
         frame.setAttribute("allowpaymentrequest", "true");
+        frame.setAttribute("allow", "autoplay; camera; microphone");
         frame.style.zIndex = "-111111111111111";
         frame.style.position = "fixed";
         frame.style.top = "0";
