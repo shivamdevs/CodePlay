@@ -58,7 +58,7 @@ export function getMarkupHTML(data) {
                     return `<script src="${head.content}"></script>`;
                 }
                 return head.content;
-            })) || ""}
+            })).join("") || ""}
             <link rel="stylesheet" href="./styles.css">
         </head>
         <body>${data?.html || ""}</body>
@@ -70,7 +70,7 @@ export function getMarkupHTML(data) {
                 return `<script src="${body.content}"></script>`;
             }
             return body.content;
-        })) || ""}
+        })).join("") || ""}
         <script src="./script.js"></script>
     `
 }
