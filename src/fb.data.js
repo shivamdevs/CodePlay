@@ -85,7 +85,7 @@ export async function getCodePlayPreview(content) {
     return new Promise((resolve) => {
         const url = createFrameSourceURL(content);
         const frame = document.createElement("iframe");
-        frame.setAttribute("sandbox", "allow-downloads allow-forms allow-modals allow-orientation-lock allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-presentation allow-scripts allow-top-navigation allow-top-navigation-by-user-activation");
+        frame.setAttribute("sandbox", "allow-downloads allow-forms allow-modals allow-same-origin allow-orientation-lock allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-presentation allow-scripts allow-top-navigation allow-top-navigation-by-user-activation");
         frame.setAttribute("allowfullscreen", "true");
         frame.setAttribute("allowtransparency", "true");
         frame.setAttribute("allowpaymentrequest", "true");

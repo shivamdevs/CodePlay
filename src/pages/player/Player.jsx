@@ -56,7 +56,7 @@ function Player() {
                 allowtransparency="true"
                 allowpaymentrequest="true"
                 allow="autoplay *; camera *; microphone *; geolocation *"
-                sandbox="allow-downloads allow-forms allow-modals allow-orientation-lock allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-presentation allow-scripts allow-top-navigation allow-top-navigation-by-user-activation"
+                sandbox="allow-downloads allow-forms allow-modals allow-same-origin allow-orientation-lock allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-presentation allow-scripts allow-top-navigation allow-top-navigation-by-user-activation"
                 onLoad={(e) => {
                     e.preventDefault();
                     URL.revokeObjectURL(iframesource);
