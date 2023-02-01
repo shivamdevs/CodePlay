@@ -18,6 +18,7 @@ import JSZip from 'jszip';
 import { saveAs } from 'file-saver';
 import { isBrowser, isMobile } from 'react-device-detect';
 import copy from 'copy-to-clipboard';
+import generateUniqueId from 'generate-unique-id';
 
 function Editor({ user = null }) {
     const params = useParams();
@@ -257,7 +258,7 @@ function Editor({ user = null }) {
         zip.file("styles.css", content?.css);
         zip.file("script.js", content?.javascript);
         zip.generateAsync({ type: "blob" }).then(function (data) {
-            saveAs(data, `${(content?.name).toLowerCase().replace(/([^a-z0-9]+)/gi, '-')}.zip`);
+            saveAs(data, `${(content?.name).toLowerCase().replace(/([^a-z0-9]+)/gi, '-')}-${content?.id}-${generateUniqueId({length: 4})}.zip`);
             setExportingZip(false);
         });
     }, [content]);
@@ -268,7 +269,7 @@ function Editor({ user = null }) {
         const zip = new JSZip();
         zip.file("index.html", getMarkup(content));
         zip.generateAsync({ type: "blob" }).then(function (data) {
-            saveAs(data, `${(content?.name).toLowerCase().replace(/([^a-z0-9]+)/gi, '-')}-build.zip`);
+            saveAs(data, `${(content?.name).toLowerCase().replace(/([^a-z0-9]+)/gi, '-')}-${content?.id}-${generateUniqueId({ length: 4 })}-build.zip`);
             setExportingHTML(false);
         });
     }, [content]);
