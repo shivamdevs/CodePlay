@@ -87,3 +87,8 @@
         align-self: flex-start;
     }
 }
+.footer-version {
+    text-align: right;
+    color: #727888;
+    font-size: 12px;
+}

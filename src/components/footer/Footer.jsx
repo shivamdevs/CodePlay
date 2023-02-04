@@ -6,12 +6,15 @@ import "./Footer.css";
 function Footer() {
     return (
         <footer className="footer">
-            <Link to="/" className="footer-flex footer-link">
-                <div className="header-image">
-                    <img src="/logo.png" alt="" />
-                </div>
-                <div className="header-text">CodePlay</div>
-            </Link>
+            <div className="footer-column">
+                <Link to="/" className="footer-flex footer-link">
+                    <div className="header-image">
+                        <img src="/logo.png" alt="" />
+                    </div>
+                    <div className="header-text">CodePlay</div>
+                </Link>
+                <div className="footer-version">Version: {app.version} Build: {app.build}</div>
+            </div>
             <div className="footer-flex-grow">
                 <div className="footer-links">
                     <div className="footer-column">

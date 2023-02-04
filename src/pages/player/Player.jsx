@@ -80,7 +80,7 @@ function Player() {
             </div>}
             <footer className="editor-footer player-footer">
                 {isMobile && <div className="player-footer-flex-full">
-                    {coderData && <div className="editor-footer-loader">By: {coderData.name}</div>}
+                    {coderData && <Link to={`/cp/${coderData.uid}`} className="editor-footer-loader">By: {coderData.name}</Link>}
                     {content && <div className="editor-footer-loader">Created: {getDisplayDate(content.created)}</div>}
                     {content && <div className="editor-footer-loader">Updated: {getDisplayDate(content.updated)}</div>}
                 </div>}
@@ -91,7 +91,7 @@ function Player() {
                         <a href="/code/new" className="editor-footer-button">{isBrowser ? "Create new code" : <i className="fas fa-plus"></i>}</a>
                         <button className="editor-footer-button" onClick={() => copy(window.location.href)}>{isBrowser ? "Copy link" : <i className="far fa-copy"></i>}</button>
                         {isBrowser && <>
-                            {coderData && <div className="editor-footer-loader">By: {coderData.name}</div>}
+                            {coderData && <Link to={`/cp/${coderData.uid}`} className="editor-footer-loader">By: {coderData.name}</Link>}
                             {content && <div className="editor-footer-loader">Created: {getDisplayDate(content.created)}</div>}
                             {content && <div className="editor-footer-loader">Updated: {getDisplayDate(content.updated)}</div>}
                         </>}

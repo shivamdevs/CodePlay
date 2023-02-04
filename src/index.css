@@ -150,7 +150,8 @@ body::-webkit-scrollbar-thumb {
 }
 
 .skeleton {
-    animation: skeleton-loading .5s linear infinite alternate;
+    animation: skeleton-loading 1s linear infinite alternate;
+    transition: 1s;
 }
 
 @keyframes skeleton-loading {

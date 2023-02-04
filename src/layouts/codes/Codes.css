@@ -36,6 +36,7 @@
     justify-content: center;
     padding-block: 50px;
     font-size: 14px;
+    width: 100%;
     color: #727888;
 }
 
@@ -90,13 +91,16 @@
 }
 
 .code-block-name+.code-block-date {
-    margin-top: autoy;
+    margin-top: auto;
 }
 
 .code-block-date {
     font-size: 12px;
     margin-bottom: 5px;
     color: #727888;
+}
+.code-block-date > a {
+    color: inherit;
 }
 
 .code-block:hover {

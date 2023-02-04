@@ -12,7 +12,7 @@ import './Codes.css';
 import sortBy from 'sort-by';
 import { deleteCode } from '../../fb.code';
 
-function Codes({ user = null, coder = null, path = "/play/", showDeleter = false }) {
+function Codes({ user = null, coder = null, path = "/play/", showDeleter = false, showBy = false }) {
     const maxItems = app.maxlength;
     const [codes, setCodes] = useState(null);
     const [queried, setQueried] = useState(null);
@@ -25,10 +25,13 @@ function Codes({ user = null, coder = null, path = "/play/", showDeleter = false
     const [itemOffset, setItemOffset] = useState(0);
     const [pageCount, setPageCount] = useState(0);
 
+    const [loading, setLoading] = useState(true);
+
     useEffect(() => {
         if (queried?.length) {
             const endOffset = itemOffset + maxItems;
             setFiltered(queried.slice(itemOffset, endOffset));
+            setLoading(false);
         } else {
             setFiltered([]);
         }
@@ -122,9 +125,9 @@ function Codes({ user = null, coder = null, path = "/play/", showDeleter = false
                 </div>
             </div>
             <div className="code-viewer">
-                {filtered === null && <div className="code-loading"><LoadSVG /></div>}
-                {filtered && filtered.length === 0 && <div className="code-loading">No code found!</div>}
-                {filtered && filtered.length > 0 && filtered.map(item => <CodeBlock path={path} delta={setDeleter} showDeleter={showDeleter} player={players} user={user} item={item} key={item.id} />)}
+                {loading && <div className="code-loading"><LoadSVG /></div>}
+                {!loading && filtered && filtered.length === 0 && <div className="code-loading">No code found!</div>}
+                {filtered && filtered.length > 0 && filtered.map(item => <CodeBlock path={path} showBy={showBy} delta={setDeleter} showDeleter={showDeleter} player={players} user={user} item={item} key={item.id} />)}
                 {queried && queried.length > maxItems && <div className="code-navigate-block">
                     <ReactPaginate
                         breakLabel="..."
@@ -161,12 +164,13 @@ function Codes({ user = null, coder = null, path = "/play/", showDeleter = false
 
 export default Codes;
 
-function CodeBlock({ item = null, user = null, player = null, path = "/play/", showDeleter = false, delta = null }) {
+function CodeBlock({ item = null, user = null, player = null, path = "/play/", showDeleter = false, showBy = false, delta = null }) {
+    const by = player?.[item?.uid] || {};
     return (
         <Link to={`${path}${item.id}`} className={classNames("code-block", { "code-block-item": isMobile })}>
             <img className='skeleton' src={item?.image} alt="" />
             <div className="code-block-name">{item.name}</div>
-            {user?.uid !== item?.uid && <div className="code-block-date">Play by: {player?.[item?.uid]?.name}</div>}
+            {showBy && <div className="code-block-date">Play by: <Link to={`/cp/${by.uid}`} onClick={(e) => e.stopPropagation()}>{by.name}</Link></div>}
             <div className="code-block-date">Updated: {getDisplayDate(item.updated)}</div>
             <div className="code-block-date">Created: {getDisplayDate(item.created)}</div>
             {user?.uid === item?.uid && showDeleter && <button className="code-block-delete roundbutton" onClick={(e) => { e.preventDefault(); delta(item); }}><i className="fas fa-trash"></i></button>}
